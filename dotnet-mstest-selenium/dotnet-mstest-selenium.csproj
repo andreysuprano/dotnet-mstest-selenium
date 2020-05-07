@@ -37,7 +37,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="desenvolvimento.runsettings">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="geckodriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

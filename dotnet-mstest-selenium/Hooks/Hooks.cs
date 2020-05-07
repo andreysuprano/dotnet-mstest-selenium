@@ -11,41 +11,34 @@ using System.Text;
 using TechTalk.SpecFlow;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium.Firefox;
+using dotnet_mstest_selenium.Hooks;
 
 namespace SeleniumCore.Hooks
 {
     [Binding]
     class Hooks
     {
-
         IWebDriver _driver;
-
         [BeforeScenario]
         public void IniciaNavegacao(ScenarioContext scenarioContext)
         {
-            var msContext = scenarioContext.ScenarioContainer.Resolve<TestContext>();
-            var navegador = msContext.Properties["navegador"].ToString();
+            var msContext = scenarioContext.ScenarioContainer.Resolve<TestContext>();            
             var ambiente = msContext.Properties["ambiente"].ToString();
+            var navegador = msContext.Properties["navegador"].ToString();
+            var tipoDeExecucao = msContext.Properties["tipoDeExecucao"].ToString();
+            
+            var driver = new WebDriverFactory(navegador, tipoDeExecucao, scenarioContext);
+            _driver = driver.GetDriver();
+
+
             var outPutDirectory =
-               Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            switch (navegador)
-            {
-                case "Chrome":
-                    _driver = new ChromeDriver(outPutDirectory);
-                    break;
-                case "Firefox":
-                    _driver = new FirefoxDriver(outPutDirectory);
-                    break;
-            }
-
-            scenarioContext["DRIVER"] = _driver;
-
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            scenarioContext["WAIT"] = wait;
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);            
 
             var appsettings = new ConfigurationBuilder().AddJsonFile(outPutDirectory + "\\appsettings." + ambiente + ".json").Build();
             scenarioContext["APPSETTINGS"] = appsettings;
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            scenarioContext["WAIT"] = wait;
 
         }
 
@@ -53,7 +46,7 @@ namespace SeleniumCore.Hooks
 
         [AfterScenario]
         public void QuitDriver()
-        {
+        {            
             _driver.Quit();
         }
 
