@@ -4,6 +4,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -26,7 +27,7 @@ namespace dotnet_mstest_selenium.Hooks
         }
 
        
-        public WebDriverFactory InstanciaWebDriver()
+        public WebDriverFactory InstanciaWebDriver(string xpto="")
         {            
 
             if(tipoDeExecucao == "local")
@@ -88,6 +89,14 @@ namespace dotnet_mstest_selenium.Hooks
             
             return _driver;
 
+
+
+        }     
+        
+        private ChromeOptions CreateChromeOptions()
+        {
+
+            return List<argumentos>;
         }
 
         public WebDriverFactory InserirNoContextoDoTeste()
@@ -96,13 +105,15 @@ namespace dotnet_mstest_selenium.Hooks
             return this;
         }
 
-        public IWebDriver GetDriver()
+        public IWebDriver GetDriver(string xpto ="")
         {
-            InstanciaWebDriver().
+            InstanciaWebDriver(xpto).
                 InserirNoContextoDoTeste();
             return _driver;
         }
 
-       
+        
+
+
     }
 }

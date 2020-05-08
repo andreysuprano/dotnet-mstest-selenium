@@ -42,6 +42,23 @@ namespace SeleniumCore.Hooks
 
         }
 
+        [BeforeScenario ("TesteDevice")]
+        public void IniciaNavegacaoTesteDevice(ScenarioContext scenarioContext)
+        {
+            var msContext = scenarioContext.ScenarioContainer.Resolve<TestContext>();
+            var ambiente = msContext.Properties["ambiente"].ToString();
+
+            var outPutDirectory =
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            var appsettings = new ConfigurationBuilder().AddJsonFile(outPutDirectory + "\\appsettings." + ambiente + ".json").Build();
+            scenarioContext["APPSETTINGS"] = appsettings;
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            scenarioContext["WAIT"] = wait;
+
+        }
+
 
 
         [AfterScenario]

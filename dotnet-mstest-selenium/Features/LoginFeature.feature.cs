@@ -215,6 +215,88 @@ namespace dotnet_mstest_selenium.Features
  this.LoginIncorreto("senha inválida", ((string[])(null)));
 #line hidden
         }
+        
+        public virtual void VariacaoDeDispositivoMobile(string device, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "TesteDevice"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Variação de dispositivo Mobile", null, @__tags);
+#line 22
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 23
+  testRunner.Given(string.Format("que o usuário esteja utilizando \"{0}\"", device), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 24
+  testRunner.When("informar suas credenciais de acesso corretamente", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 25
+  testRunner.Then("o sistema apresentará tela de produtos", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Variação de dispositivo Mobile: Galaxy s5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TesteDevice")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Galaxy s5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:device", "Galaxy s5")]
+        public virtual void VariacaoDeDispositivoMobile_GalaxyS5()
+        {
+#line 22
+ this.VariacaoDeDispositivoMobile("Galaxy s5", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Variação de dispositivo Mobile: iPhone 6/7/8 Plus")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TesteDevice")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "iPhone 6/7/8 Plus")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:device", "iPhone 6/7/8 Plus")]
+        public virtual void VariacaoDeDispositivoMobile_IPhone678Plus()
+        {
+#line 22
+ this.VariacaoDeDispositivoMobile("iPhone 6/7/8 Plus", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Variação de dispositivo Mobile: Pixel 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TesteDevice")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Pixel 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:device", "Pixel 2")]
+        public virtual void VariacaoDeDispositivoMobile_Pixel2()
+        {
+#line 22
+ this.VariacaoDeDispositivoMobile("Pixel 2", ((string[])(null)));
+#line hidden
+        }
     }
 }
 #pragma warning restore
