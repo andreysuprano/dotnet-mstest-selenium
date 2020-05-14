@@ -2,13 +2,9 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Policy;
 using TechTalk.SpecFlow;
 
 namespace dotnet_mstest_selenium.Hooks
@@ -27,7 +23,7 @@ namespace dotnet_mstest_selenium.Hooks
         }
 
        
-        public WebDriverFactory InstanciaWebDriver(string xpto="")
+        public WebDriverFactory InstanciaWebDriver()
         {            
 
             if(tipoDeExecucao == "local")
@@ -49,7 +45,7 @@ namespace dotnet_mstest_selenium.Hooks
             switch (navegador)
             {
                 case "Chrome":
-                    _driver = new ChromeDriver(outPutDirectory);
+                    _driver = new ChromeDriver(outPutDirectory);                    
                     break;
                 case "Firefox":
                     _driver = new FirefoxDriver(outPutDirectory);
@@ -61,16 +57,17 @@ namespace dotnet_mstest_selenium.Hooks
 
         private IWebDriver InstaciaRemoteDriver()
         {
-            var hubUri = new Uri("http://localhost:2222/wd/hub");
+            var hubUri = new Uri("http://localhost:4444/wd/hub");
 
             switch(navegador)
             {
                 case "Chrome":                
                     var chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArgument("headless");
+                    //chromeOptions.AddArgument("headless");
                     chromeOptions.AddArgument("disable-gpu");
-                    chromeOptions.PlatformName = "WINDOWS";
+                    chromeOptions.PlatformName = "LINUX";
                     chromeOptions.AddArgument("--start-maximized");
+                    //chromeOptions.EnableMobileEmulation("Galaxy S5");
 
                     _driver = new RemoteWebDriver(hubUri, chromeOptions);
                     break;
@@ -80,8 +77,8 @@ namespace dotnet_mstest_selenium.Hooks
                     var firefoxOptions = new FirefoxOptions();
                    //firefoxOptions.AddArgument("headless");
                     firefoxOptions.AddArgument("disable-gpu");
-                    firefoxOptions.PlatformName = "WINDOWS";
-                    firefoxOptions.AddArgument("--start-maximized");
+                    firefoxOptions.PlatformName = "LINUX";
+                    firefoxOptions.AddArgument("--start-maximized");                    
 
                     _driver = new RemoteWebDriver(hubUri, firefoxOptions);
                     break;
@@ -92,22 +89,16 @@ namespace dotnet_mstest_selenium.Hooks
 
 
         }     
-        
-        private ChromeOptions CreateChromeOptions()
-        {
-
-            return List<argumentos>;
-        }
-
+                
         public WebDriverFactory InserirNoContextoDoTeste()
         {
             scenarioContext["DRIVER"] = _driver;            
             return this;
         }
 
-        public IWebDriver GetDriver(string xpto ="")
+        public IWebDriver GetDriver()
         {
-            InstanciaWebDriver(xpto).
+            InstanciaWebDriver().
                 InserirNoContextoDoTeste();
             return _driver;
         }

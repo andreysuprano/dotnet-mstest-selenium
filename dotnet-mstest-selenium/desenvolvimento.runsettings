@@ -20,7 +20,7 @@
 		<!-- Specify timeout in milliseconds. A valid value should be greater than 0 -->
 		<TestSessionTimeout>0</TestSessionTimeout>
 
-		<DisableParallelization>true</DisableParallelization>
+		<DisableParallelization>false</DisableParallelization>
 	</RunConfiguration>
 
 	<!-- Configurations for data collectors -->

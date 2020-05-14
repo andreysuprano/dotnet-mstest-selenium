@@ -1,14 +1,8 @@
 ﻿using OpenQA.Selenium;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System;
 using TechTalk.SpecFlow;
 using dotnetcore_mstest_selenium.Controller;
-using System.Configuration;
 using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium.Remote;
 
 namespace SeleniumCore.Steps
 {
@@ -102,38 +96,8 @@ namespace SeleniumCore.Steps
 
             Assert.IsTrue(loginController.ExisteBotaoErro());
 
-        }
-
-        [Given(@"que o usuário esteja utilizando ""(.*)""")]
-        public void DadoQueOUsuarioEstejaUtilizando(string device)
-        {
-            var hubUri = new Uri("http://localhost:2222/wd/hub");
-
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("headless");
-            chromeOptions.AddArgument("disable-gpu");
-            chromeOptions.PlatformName = "WINDOWS";
-            chromeOptions.AddArgument("--start-maximized");            
-
-            switch (device)
-            {
-                case "Galaxy s5":
-                    chromeOptions.EnableMobileEmulation("Galaxy s5");
-                    break;                
-                   
-
-                case "iPhone 6/7/8 Plus":
-                    chromeOptions.EnableMobileEmulation("iPhone 6/7/8 Plus");
-                    break;
-
-                case "Pixel 2":
-                    chromeOptions.EnableMobileEmulation("Pixel 2");
-                    break;
-            }
-
-            _driver = new RemoteWebDriver(hubUri, chromeOptions);
+        }     
             
-        }
-
+       
     }
 }
