@@ -7,6 +7,7 @@ _______________
 - Selenium Grid
 - SpecFlow
 - .NET Core
+- MsTest
 - Docker
 
 # Como executar
